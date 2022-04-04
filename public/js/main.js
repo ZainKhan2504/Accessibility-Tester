@@ -77,4 +77,13 @@ const escapeHTML = (html) => {
     .replace(/'/g, "&#039;");
 };
 
+//Clear results
+const clearResults = (e) => {
+  e.preventDefault();
+  issuesOutput.innerHTML = "";
+  issuesCount.innerHTML = "";
+  document.querySelector("#url").value = "";
+};
+
 document.querySelector("#form").addEventListener("submit", testAccessibility);
+document.querySelector("#clearResults").addEventListener("click", clearResults);
