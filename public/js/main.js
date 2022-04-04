@@ -32,6 +32,40 @@ const testAccessibility = async (e) => {
   }
 };
 
+//Download CSV
+const csvIssues = async (e) => {
+  e.preventDefault();
+  const url = document.querySelector("#url").value;
+  if (url === "") {
+    issuesOutput.innerHTML = emptyUrl;
+  } else {
+    const response = await fetch(`/api/test?url=${url}`);
+
+    if (response.status !== 200) {
+      setLoading(false);
+      alert(csvMessage);
+    } else if (issues.length === 0) {
+      alert(CsvMessage);
+    } else {
+      const { issues } = await response.json();
+      const csv = issues
+        .map((issue) => {
+          return `${issue.code},${issue.message},${issue.context}`;
+        })
+        .join("\n");
+
+      const csvBlob = new Blob([csv], { type: "text/csv" });
+      const csvUrl = URL.createObjectURL(csvBlob);
+      const link = document.createElement("a");
+      link.href = csvUrl;
+      link.download = "Accessibility_issues_list_" + url.substring(12) + ".csv";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  }
+};
+
 // Add issues to DOM
 const addIssuesToDOM = (issues) => {
   issuesOutput.innerHTML = "";
@@ -87,3 +121,4 @@ const clearResults = (e) => {
 
 document.querySelector("#form").addEventListener("submit", testAccessibility);
 document.querySelector("#clearResults").addEventListener("click", clearResults);
+document.querySelector("#csvBtn").addEventListener("click", csvIssues);
