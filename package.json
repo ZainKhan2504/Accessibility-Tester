@@ -1,0 +1,27 @@
+{
+  "name": "accessibility-tester",
+  "version": "1.0.0",
+  "description": "Small application using vanilla javascript, Node JS and Pa11y for accessibility testing of any website.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "server": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZainKhan2504/Accessibility-Tester.git"
+  },
+  "author": "Zain Khan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ZainKhan2504/Accessibility-Tester/issues"
+  },
+  "homepage": "https://github.com/ZainKhan2504/Accessibility-Tester#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "pa11y": "^6.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
